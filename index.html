@@ -1,325 +1,231 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<base target="_top">
-<title>Tribunal de Lasten — O Veredito</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Autos nº 24CR180 — Convocação</title>
+<meta name="robots" content="noindex, nofollow" />
+<meta name="description" content="Um processo corre em seu nome. O tribunal se reúne em 08.08.2026." />
+<meta property="og:title" content="VOCÊ ESTÁ CONVOCADO — Autos nº 24CR180" />
+<meta property="og:description" content="Um processo corre em seu nome. As provas estão sendo reunidas." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root{
-    color-scheme: dark;
-    --ink:#0b0a07; --ink-2:#14110b; --panel:#17130c;
-    --brass:#c6a253; --brass-hi:#e6cd8f; --brass-dim:#8a713d;
-    --crimson:#7e1a1a; --crimson-hi:#a5312a;
-    --parchment:#e7dcc0; --parchment-2:#d8c9a4;
-    --text:#e8dfc9; --muted:#9a8b6b; --line:rgba(198,162,83,.28);
-    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
-    --sans:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --ink:#0b0a07; --brass:#c6a253; --brass-hi:#e6cd8f; --blood:#7e1a1a;
+    --parch:#e7dcc0; --ivory:#e8dfc9; --amber:#9a8b6b;
+    --serif:"EB Garamond", Georgia, "Times New Roman", serif;
+    --engrave:"Cinzel", Georgia, serif;
+    --mono:"IBM Plex Mono", ui-monospace, "Courier New", monospace;
   }
-  *{ box-sizing:border-box; }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
   body{
-    margin:0; min-height:100dvh;
     background:
-      radial-gradient(120% 80% at 50% -8%, rgba(198,162,83,.14), transparent 46%),
-      radial-gradient(140% 120% at 50% 120%, rgba(126,26,26,.10), transparent 55%),
-      radial-gradient(100% 100% at 50% 40%, var(--ink-2), var(--ink) 78%);
-    color:var(--text); font-family:var(--serif); -webkit-font-smoothing:antialiased;
-    display:flex; justify-content:center; align-items:flex-start;
-    padding:clamp(18px,5vw,44px) clamp(14px,4vw,28px) 48px;
+      radial-gradient(120% 80% at 50% 8%, #17140d 0%, #0b0a07 55%, #060504 100%);
+    color:var(--ivory);
+    font-family:var(--serif);
+    min-height:100dvh;
+    display:flex; align-items:center; justify-content:center;
+    padding:clamp(20px,5vw,56px);
+    position:relative; overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
   }
-  body::before{
-    content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
-    background:radial-gradient(60% 42% at 50% 6%, rgba(230,205,143,.10), transparent 60%);
-    animation:flicker 6.5s ease-in-out infinite;
+  /* candle-light vignette */
+  body::after{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    background:radial-gradient(75% 55% at 50% 42%, transparent 40%, rgba(0,0,0,.55) 100%);
+    mix-blend-mode:multiply;
   }
-  @keyframes flicker{ 0%,100%{opacity:.85} 40%{opacity:1} 55%{opacity:.7} 70%{opacity:.95} }
-
-  .decree{
-    position:relative; z-index:1; width:100%; max-width:440px;
-    background:linear-gradient(180deg, rgba(35,28,17,.55), rgba(12,10,7,.35));
-    border:1px solid var(--line);
-    box-shadow:0 30px 80px -30px rgba(0,0,0,.9), inset 0 1px 0 rgba(230,205,143,.06);
-    padding:clamp(26px,7vw,40px) clamp(20px,6vw,34px) clamp(22px,6vw,30px);
-    display:flex; flex-direction:column; align-items:center; gap:22px;
-    animation:rise .9s cubic-bezier(.2,.7,.2,1) both;
+  .frame{
+    width:min(680px,100%); position:relative; z-index:1;
+    border:1px solid rgba(198,162,83,.35);
+    box-shadow:0 0 0 1px rgba(198,162,83,.12) inset, 0 30px 80px rgba(0,0,0,.6);
+    padding:clamp(28px,6vw,60px) clamp(20px,6vw,56px);
+    background:linear-gradient(180deg, rgba(231,220,192,.03), rgba(231,220,192,0) 30%);
+    text-align:center;
   }
-  @keyframes rise{ from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none} }
+  /* corner filigree */
+  .corner{position:absolute; width:34px; height:34px; border:1px solid var(--brass); opacity:.55}
+  .corner.tl{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .corner.tr{top:-1px;right:-1px;border-left:0;border-bottom:0}
+  .corner.bl{bottom:-1px;left:-1px;border-right:0;border-top:0}
+  .corner.br{bottom:-1px;right:-1px;border-left:0;border-top:0}
 
-  .corner{ position:absolute; width:24px; height:24px; color:var(--brass); opacity:.75; }
-  .corner svg{ width:100%; height:100%; display:block; }
-  .corner.tl{ top:9px; left:9px; }
-  .corner.tr{ top:9px; right:9px; transform:scaleX(-1); }
-  .corner.bl{ bottom:9px; left:9px; transform:scaleY(-1); }
-  .corner.br{ bottom:9px; right:9px; transform:scale(-1,-1); }
-
-  .kicker{ font-family:var(--sans); font-size:.62rem; letter-spacing:.32em; text-transform:uppercase;
-    color:var(--brass); font-weight:600; text-align:center; line-height:1.7; }
-  .kicker .dot{ color:var(--brass-dim); margin:0 .5em; }
-
-  .emblem{ width:66px; height:66px; color:var(--brass); filter:drop-shadow(0 4px 10px rgba(198,162,83,.25)); }
-  .emblem svg{ width:100%; height:100%; display:block; }
-
-  .title{ margin:0; text-align:center; font-size:clamp(2.35rem,10vw,3rem); font-weight:600;
-    letter-spacing:.14em; text-transform:uppercase; color:var(--parchment); line-height:1; text-wrap:balance; }
-
-  .rule{ display:flex; align-items:center; gap:12px; width:100%; color:var(--brass-dim); }
-  .rule::before,.rule::after{ content:""; height:1px; flex:1;
-    background:linear-gradient(90deg,transparent,var(--line),transparent); }
-  .rule .fleuron{ width:9px; height:9px; transform:rotate(45deg); border:1px solid var(--brass); }
-
-  .record{ width:100%; text-align:center; display:flex; flex-direction:column; gap:6px; }
-  .record .autos{ font-family:var(--sans); font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); }
-  .record .label{ font-family:var(--sans); font-size:.58rem; letter-spacing:.34em; text-transform:uppercase; color:var(--brass); margin-top:6px; }
-  .record .name{ font-size:1.9rem; letter-spacing:.02em; color:var(--text); font-weight:600; }
-  .charges{ display:flex; flex-wrap:wrap; justify-content:center; gap:6px 0; margin-top:4px;
-    color:var(--muted); font-size:.82rem; letter-spacing:.06em; }
-  .charges span{ padding:0 .7em; }
-  .charges span + span{ border-left:1px solid var(--line); }
-
-  .prompt{ text-align:center; color:var(--text); font-size:1.06rem; line-height:1.5; max-width:34ch; margin:0 auto; }
-  .prompt em{ color:var(--brass-hi); font-style:italic; }
-  .ask{ display:flex; flex-direction:column; align-items:center; gap:9px; }
-  .subnote{ text-align:center; color:var(--muted); font-family:var(--sans); font-size:.6rem;
-    letter-spacing:.18em; text-transform:uppercase; line-height:1.7; max-width:32ch; }
-  .subnote b{ color:var(--brass); font-weight:600; }
-
-  .ballots{ width:100%; display:flex; flex-direction:column; gap:12px; }
-  .ballot{
-    position:relative; width:100%; display:flex; align-items:center; gap:16px;
-    padding:18px 18px; cursor:pointer; font-family:var(--serif); text-align:left;
-    border:1px solid transparent; background:var(--panel); color:var(--text);
-    transition:transform .18s ease, box-shadow .25s ease, opacity .25s ease, border-color .25s ease;
-    -webkit-tap-highlight-color:transparent;
+  .meta{
+    font-family:var(--mono); font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--amber);
   }
-  .ballot .ico{ width:34px; height:34px; flex:0 0 34px; }
-  .ballot .ico svg{ width:100%; height:100%; display:block; }
-  .ballot .verd{ display:flex; flex-direction:column; gap:2px; }
-  .ballot .verd b{ font-size:1.3rem; letter-spacing:.16em; text-transform:uppercase; font-weight:600; }
-  .ballot .verd small{ font-family:var(--sans); font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; opacity:.72; }
-  .ballot.guilty{ background:linear-gradient(180deg,#5f1414,#3f0d0d); border-color:#7e1a1a; color:#f4e3d6; }
-  .ballot.guilty .ico{ color:#e9b9a6; }
-  .ballot.innocent{ background:linear-gradient(180deg,#e7dcc0,#d3c39c); border-color:#b7a366; color:#2a2114; }
-  .ballot.innocent .ico{ color:#6b551f; }
-  .ballot.innocent .verd small{ opacity:.6; }
-  .ballot:hover{ transform:translateY(-2px); }
-  .ballot:focus-visible{ outline:2px solid var(--brass-hi); outline-offset:3px; }
-  .ballots.chosen .ballot[aria-pressed="false"]{ opacity:.34; filter:saturate(.6); }
-  .ballot[aria-pressed="true"]{ box-shadow:0 0 0 2px var(--brass), 0 18px 40px -20px rgba(0,0,0,.9); }
+  .balance{width:56px;height:56px;margin:6px auto 18px;display:block;opacity:.9}
+  .balance path,.balance line,.balance circle{stroke:var(--brass);stroke-width:1.4;fill:none;stroke-linecap:round}
 
-  .stamp{ position:absolute; top:50%; right:14px; width:52px; height:52px;
-    transform:translateY(-50%) scale(.4); opacity:0; pointer-events:none; }
-  .stamp svg{ width:100%; height:100%; display:block; }
-  .ballot[aria-pressed="true"] .stamp{ animation:stampin .5s cubic-bezier(.2,1.4,.3,1) forwards; }
-  @keyframes stampin{
-    0%{ opacity:0; transform:translateY(-50%) scale(1.7) rotate(-14deg) }
-    60%{ opacity:1; transform:translateY(-50%) scale(.9) rotate(4deg) }
-    100%{ opacity:.96; transform:translateY(-50%) scale(1) rotate(-3deg) }
+  h1{
+    font-family:var(--engrave); font-weight:700;
+    font-size:clamp(30px,7vw,52px); letter-spacing:.14em; line-height:1.05;
+    margin:.1em 0 .35em; color:var(--parch);
+    text-shadow:0 1px 0 rgba(0,0,0,.6);
   }
+  .rule{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--brass),transparent);margin:20px auto}
+  .lede{
+    font-size:clamp(17px,2.6vw,20px); line-height:1.55; color:var(--ivory);
+    max-width:44ch; margin:0 auto 6px; font-style:italic;
+  }
+  .lede em{color:var(--brass-hi); font-style:italic}
 
-  .seal-btn{
-    width:100%; margin-top:2px; padding:16px; cursor:pointer; font-family:var(--sans);
-    font-size:.74rem; letter-spacing:.3em; text-transform:uppercase; font-weight:600; color:var(--ink);
-    background:linear-gradient(180deg,var(--brass-hi),var(--brass)); border:1px solid var(--brass-hi);
-    transition:opacity .25s ease, transform .15s ease, box-shadow .25s ease;
-    box-shadow:0 14px 30px -16px rgba(198,162,83,.7);
-  }
-  .seal-btn:disabled{ opacity:.32; cursor:not-allowed; box-shadow:none;
-    background:linear-gradient(180deg,#4a3f27,#39301d); color:var(--muted); border-color:var(--brass-dim); }
-  .seal-btn:not(:disabled):hover{ transform:translateY(-2px); }
-  .seal-btn:focus-visible{ outline:2px solid var(--parchment); outline-offset:3px; }
+  /* countdown */
+  .cd-label{font-family:var(--mono); font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--amber); margin-top:30px}
+  .cd{display:flex; gap:clamp(8px,3vw,20px); justify-content:center; margin:12px 0 4px}
+  .cd .u{min-width:60px}
+  .cd .n{font-family:var(--engrave); font-weight:700; font-size:clamp(26px,7vw,44px); color:var(--parch); font-variant-numeric:tabular-nums}
+  .cd .k{font-family:var(--mono); font-size:9.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--amber); margin-top:4px}
+  .date{font-family:var(--mono); font-size:12px; letter-spacing:.24em; color:var(--brass); margin-top:8px}
 
-  .foot{ font-family:var(--sans); font-size:.56rem; letter-spacing:.24em; text-transform:uppercase;
-    color:var(--brass-dim); text-align:center; }
+  /* capture */
+  form{margin:30px auto 0; max-width:420px; text-align:left}
+  .cta{font-family:var(--engrave); font-size:14px; letter-spacing:.1em; text-align:center; color:var(--parch); margin-bottom:12px; text-transform:uppercase}
+  .field{
+    width:100%; background:rgba(231,220,192,.06); border:1px solid rgba(198,162,83,.4);
+    color:var(--ivory); font-family:var(--serif); font-size:16px; padding:13px 14px; border-radius:2px;
+  }
+  .field::placeholder{color:var(--amber)}
+  .field:focus{outline:none; border-color:var(--brass-hi); background:rgba(231,220,192,.09)}
+  .consent{display:flex; gap:10px; align-items:flex-start; margin:14px 2px; font-size:13px; line-height:1.45; color:var(--amber)}
+  .consent input{margin-top:3px; accent-color:var(--brass)}
+  .consent a{color:var(--brass)}
+  button{
+    width:100%; margin-top:16px; cursor:pointer;
+    font-family:var(--engrave); font-weight:700; letter-spacing:.14em; text-transform:uppercase; font-size:14px;
+    color:var(--ink); background:linear-gradient(180deg,var(--brass-hi),var(--brass));
+    border:0; padding:15px; border-radius:2px; transition:filter .2s;
+  }
+  button:hover{filter:brightness(1.08)}
+  button:disabled{opacity:.5; cursor:not-allowed; filter:grayscale(.3)}
+  .err{color:#e08a8a; font-size:12.5px; margin:8px 2px 0; min-height:1em; font-family:var(--mono)}
 
-  .overlay{
-    position:fixed; inset:0; z-index:50; display:none; flex-direction:column; align-items:center;
-    justify-content:center; gap:18px; text-align:center; padding:32px;
-    background:radial-gradient(120% 90% at 50% 30%, #17110a, #060504 80%);
+  /* join button */
+  .join{margin:30px auto 0; max-width:420px}
+  .joinbtn{
+    display:block; text-align:center; text-decoration:none; cursor:pointer;
+    font-family:var(--engrave); font-weight:700; letter-spacing:.14em; text-transform:uppercase; font-size:14px;
+    color:var(--ink); background:linear-gradient(180deg,var(--brass-hi),var(--brass));
+    padding:16px; border-radius:2px; transition:filter .2s;
   }
-  .overlay.show{ display:flex; animation:fade .6s ease both; }
-  @keyframes fade{ from{opacity:0} to{opacity:1} }
-  .overlay .big-stamp{ width:150px; height:150px; margin-bottom:4px; animation:thud .6s cubic-bezier(.2,1.3,.3,1) both; }
-  .overlay .big-stamp svg{ width:100%; height:100%; display:block; }
-  @keyframes thud{
-    0%{ opacity:0; transform:scale(1.9) rotate(-12deg) }
-    55%{ opacity:1; transform:scale(.9) rotate(3deg) }
-    100%{ opacity:1; transform:scale(1) rotate(-2deg) }
-  }
-  .overlay .sealed{ font-family:var(--sans); font-size:.66rem; letter-spacing:.4em; text-transform:uppercase; color:var(--brass); }
-  .overlay .verdict-word{ font-size:clamp(2.6rem,13vw,3.6rem); font-weight:600; letter-spacing:.16em;
-    text-transform:uppercase; margin:0; line-height:1; }
-  .overlay.g .verdict-word{ color:#d9433a; }
-  .overlay.i .verdict-word{ color:var(--parchment); }
-  .overlay .line{ color:var(--text); max-width:30ch; line-height:1.55; font-size:1.02rem; animation:fade 1s .25s ease both; }
-  .overlay .notfinal{ color:var(--brass-hi); max-width:30ch; line-height:1.5; font-size:1.02rem; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:11px 0; margin:2px 0; animation:fade 1s .4s ease both; }
-  .overlay .notfinal b{ color:var(--parchment); font-weight:700; }
-  .overlay .hush{ color:var(--muted); font-size:.9rem; font-style:italic; max-width:28ch; animation:fade 1s .5s ease both; }
-  .overlay .proto{ font-family:var(--sans); font-size:.56rem; letter-spacing:.24em; text-transform:uppercase;
-    color:var(--brass-dim); margin-top:6px; animation:fade 1s .7s ease both; }
-  .overlay .retify{ margin-top:10px; background:none; border:none; cursor:pointer; font-family:var(--sans);
-    font-size:.6rem; letter-spacing:.24em; text-transform:uppercase; color:var(--brass-dim);
-    text-decoration:underline; text-underline-offset:4px; animation:fade 1s .9s ease both; }
-  .overlay .retify:hover{ color:var(--brass); }
-  .overlay .retify:focus-visible{ outline:1px solid var(--brass); outline-offset:3px; }
+  .joinbtn:hover{filter:brightness(1.08)}
+  .joinbtn[aria-disabled="true"]{opacity:.5; cursor:not-allowed; filter:grayscale(.3)}
+  .consent-note{font-size:12.5px; line-height:1.5; color:var(--amber); margin:14px 4px 0; text-align:center}
+  .consent-note strong{color:var(--brass)}
 
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; }
-    body::before{ animation:none; }
-  }
+  /* thank-you */
+  .done{display:none}
+  .done.show{display:block; animation:fade .8s ease}
+  form.hide{display:none}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+  .done .seal{font-family:var(--engrave); font-size:20px; letter-spacing:.14em; color:var(--brass-hi); margin-bottom:8px}
+  .done p{color:var(--ivory); font-style:italic; max-width:38ch; margin:0 auto}
+
+  .footnote{font-family:var(--mono); font-size:10px; letter-spacing:.14em; color:#5c5342; margin-top:34px; text-transform:uppercase}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
-<main class="decree" role="main" aria-label="Câmara de votação do júri">
-  <span class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22V6q0-4 4-4h16"/><path d="M2 13V9q0-3 3-3h4"/></svg></span>
-  <span class="corner tr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22V6q0-4 4-4h16"/><path d="M2 13V9q0-3 3-3h4"/></svg></span>
-  <span class="corner bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22V6q0-4 4-4h16"/><path d="M2 13V9q0-3 3-3h4"/></svg></span>
-  <span class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22V6q0-4 4-4h16"/><path d="M2 13V9q0-3 3-3h4"/></svg></span>
+  <main class="frame" role="main">
+    <span class="corner tl"></span><span class="corner tr"></span>
+    <span class="corner bl"></span><span class="corner br"></span>
 
-  <div class="kicker">Tribunal de Lasten <span class="dot">✦</span> Câmara do Júri</div>
+    <div class="meta">Autos nº 24CR180 · Tribunal de Lasten</div>
 
-  <div class="emblem" aria-hidden="true">
-    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M50 14v66"/>
-      <circle cx="50" cy="12" r="3.2" fill="currentColor" stroke="none"/>
-      <path d="M22 26h56"/>
-      <path d="M50 26 34 26M50 26 66 26"/>
-      <path d="M22 26 13 48h18z"/>
-      <path d="M78 26 69 48h18z"/>
-      <path d="M13 48q9 9 18 0"/>
-      <path d="M69 48q9 9 18 0"/>
-      <path d="M38 84h24"/>
-      <path d="M44 84q6-8 12 0"/>
+    <svg class="balance" viewBox="0 0 64 64" aria-hidden="true">
+      <line x1="32" y1="8" x2="32" y2="46"/>
+      <line x1="14" y1="18" x2="50" y2="18"/>
+      <circle cx="32" cy="8" r="2.4"/>
+      <path d="M14 18 L8 32 a8 8 0 0 0 12 0 Z"/>
+      <path d="M50 18 L44 32 a8 8 0 0 0 12 0 Z"/>
+      <line x1="22" y1="50" x2="42" y2="50"/>
+      <line x1="32" y1="46" x2="32" y2="50"/>
     </svg>
-  </div>
 
-  <h1 class="title">O&nbsp;Veredito</h1>
+    <h1>Você está<br>convocado</h1>
+    <div class="rule"></div>
+    <p class="lede">Um processo corre em seu nome. As provas estão sendo reunidas — e, um dia, <em>o espelho os revelará.</em></p>
 
-  <div class="rule"><span class="fleuron"></span></div>
-
-  <div class="record">
-    <div class="autos">Autos nº 24CR180</div>
-    <div class="label">O Réu</div>
-    <div class="name">Adam Kimber</div>
-    <div class="charges">
-      <span>Adultério</span><span>Roubo</span><span>Homicídio</span>
+    <div class="cd-label">O tribunal se reúne em</div>
+    <div class="cd" id="cd" aria-live="polite">
+      <div class="u"><div class="n" id="d">--</div><div class="k">dias</div></div>
+      <div class="u"><div class="n" id="h">--</div><div class="k">horas</div></div>
+      <div class="u"><div class="n" id="m">--</div><div class="k">min</div></div>
+      <div class="u"><div class="n" id="s">--</div><div class="k">seg</div></div>
     </div>
-  </div>
+    <div class="date">08 · 08 · 2026 — 20H00</div>
 
-  <div class="ask">
-    <p class="prompt">Membro do Júri, pesadas as provas e ouvidos os depoimentos — <em>qual é o seu veredito?</em></p>
-    <p class="subnote">O júri é ouvido — mas o veredito final cabe ao <b>Tribunal</b>.</p>
-  </div>
+    <div class="join">
+      <div class="cta">Sua intimação exige presença</div>
+      <a class="joinbtn" id="joinBtn" href="#" rel="noopener">Atender à convocação</a>
+      <p class="consent-note">Ao atender, você receberá as peças deste processo, uma a uma. Comunicação da <strong>Igreja Além do Véu</strong> (São Bernardo/SP) — você pode sair quando quiser.</p>
+    </div>
 
-  <div class="ballots" id="ballots">
-    <button class="ballot guilty" type="button" aria-pressed="false" data-verdict="culpado">
-      <span class="ico" aria-hidden="true">
-        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="20" y="6" width="15" height="8" rx="1.5" transform="rotate(45 27 10)"/>
-          <path d="M22 12 9 25"/><path d="M6 34h16"/><path d="M14 25l-4 4"/>
-        </svg>
-      </span>
-      <span class="verd"><b>Culpado</b><small>Condeno o réu</small></span>
-      <span class="stamp" aria-hidden="true">
-        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="#7e1a1a"/><circle cx="26" cy="26" r="19" fill="none" stroke="#e9b9a6" stroke-width="1.2"/><text x="26" y="30" text-anchor="middle" font-family="ui-sans-serif,sans-serif" font-size="8.5" letter-spacing="1" fill="#f4e3d6">SELADO</text></svg>
-      </span>
-    </button>
-
-    <button class="ballot innocent" type="button" aria-pressed="false" data-verdict="inocente">
-      <span class="ico" aria-hidden="true">
-        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 34c0-10-6-14-14-15 8-2 14 0 14 8"/>
-          <path d="M20 34c0-10 6-14 14-15-8-2-14 0-14 8"/>
-          <path d="M20 20v14"/>
-        </svg>
-      </span>
-      <span class="verd"><b>Inocente</b><small>Absolvo o réu</small></span>
-      <span class="stamp" aria-hidden="true">
-        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="#b7a366"/><circle cx="26" cy="26" r="19" fill="none" stroke="#3a2f16" stroke-width="1.2"/><text x="26" y="30" text-anchor="middle" font-family="ui-sans-serif,sans-serif" font-size="8.5" letter-spacing="1" fill="#2a2114">SELADO</text></svg>
-      </span>
-    </button>
-  </div>
-
-  <button class="seal-btn" id="sealBtn" type="button" disabled>Selar veredito</button>
-
-  <div class="foot">Sentença Máxima · Paulinho Ramos</div>
-</main>
-
-<section class="overlay" id="overlay" role="alertdialog" aria-modal="true" aria-labelledby="ovWord">
-  <div class="big-stamp" id="ovStamp" aria-hidden="true"></div>
-  <div class="sealed">Veredito selado</div>
-  <h2 class="verdict-word" id="ovWord">—</h2>
-  <p class="line">Que conste nos autos: o seu voto foi registrado perante o Tribunal de Lasten.</p>
-  <p class="notfinal">Mas este <b>não</b> é o veredito final — o Tribunal ainda se pronunciará.</p>
-  <p class="hush">Permaneça em silêncio. O julgamento será concluído.</p>
-  <div class="proto" id="ovProto"></div>
-  <button class="retify" id="retify" type="button">Retificar meu voto</button>
-</section>
+    <div class="footnote">Guarde a data. Seu nome será chamado.</div>
+  </main>
 
 <script>
-  // ============================================================
-  //  ENVIO DO VOTO  →  Google Forms (aguenta plateia gigante)
-  //  Cole abaixo os 2 valores que o criarFormulario.gs imprimiu.
-  //  Enquanto vazios, a página só mostra a cena (não envia nada).
-  // ============================================================
-  const FORM_ACTION  = "";   // ...formResponse
-  const ENTRY_ID     = "";   // entry.XXXXXXXXX
-  const FORM_OPTIONS = { culpado:"CULPADO — Condeno o réu", inocente:"INOCENTE — Absolvo o réu" };
+  // ==== CONFIG =============================================================
+  // Alvo da contagem: 08/08/2026 20h00 (horário de Brasília, -03:00)
+  var TARGET = new Date("2026-08-08T20:00:00-03:00").getTime();
+  // Endpoint opcional de medição de scans (Apps Script). Deixe vazio se não usar.
+  var ENDPOINT = ""; // ex.: "https://script.google.com/macros/s/XXX/exec"
+  // Link do grupo/canal de WhatsApp. TODO: colar o convite (https://chat.whatsapp.com/XXXX
+  // ou, ideal, o link do CANAL do WhatsApp).
+  var GRUPO_URL = ""; // ex.: "https://chat.whatsapp.com/ABC123..."
+  // ========================================================================
 
-  function recordVote(verdict){
-    try{ localStorage.setItem("lasten_voto", verdict); }catch(e){}
-    if(!FORM_ACTION || !ENTRY_ID) return;          // ainda não configurado
-    const data = new FormData();
-    data.append(ENTRY_ID, FORM_OPTIONS[verdict]);
-    try{ if(navigator.sendBeacon && navigator.sendBeacon(FORM_ACTION, data)) return; }catch(e){}
-    fetch(FORM_ACTION, { method:"POST", mode:"no-cors", body:data }).catch(()=>{});
+  // Origem do scan (?p=) para medição — capturada junto do contato
+  var params = new URLSearchParams(location.search);
+  var origem = params.get("p") || "direto";
+
+  // Log de pageview por origem (medição de SCANS, independente do formulário)
+  try {
+    if (ENDPOINT) {
+      navigator.sendBeacon(
+        ENDPOINT + "?e=view&p=" + encodeURIComponent(origem),
+        new Blob([], {type:"text/plain"})
+      );
+    }
+  } catch(e){}
+
+  // Contagem regressiva
+  var el = { d:document.getElementById("d"), h:document.getElementById("h"),
+             m:document.getElementById("m"), s:document.getElementById("s") };
+  function pad(n){return (n<10?"0":"")+n;}
+  function tick(){
+    var diff = TARGET - Date.now();
+    if (diff <= 0){ el.d.textContent="00"; el.h.textContent="00"; el.m.textContent="00"; el.s.textContent="00"; return; }
+    var dd=Math.floor(diff/864e5), hh=Math.floor(diff%864e5/36e5),
+        mm=Math.floor(diff%36e5/6e4), ss=Math.floor(diff%6e4/1e3);
+    el.d.textContent=pad(dd); el.h.textContent=pad(hh); el.m.textContent=pad(mm); el.s.textContent=pad(ss);
   }
+  tick(); setInterval(tick, 1000);
 
-  const ballots = document.getElementById("ballots");
-  const buttons = [...ballots.querySelectorAll(".ballot")];
-  const sealBtn = document.getElementById("sealBtn");
-  const overlay = document.getElementById("overlay");
-  const ovWord  = document.getElementById("ovWord");
-  const ovStamp = document.getElementById("ovStamp");
-  const ovProto = document.getElementById("ovProto");
-  const retify  = document.getElementById("retify");
-  let choice = null;
-
-  const buzz = ms => { try{ navigator.vibrate && navigator.vibrate(ms); }catch(e){} };
-
-  buttons.forEach(b=>{
-    b.addEventListener("click", ()=>{
-      choice = b.dataset.verdict;
-      buttons.forEach(x=> x.setAttribute("aria-pressed", String(x===b)));
-      ballots.classList.add("chosen");
-      sealBtn.disabled = false;
-      buzz(12);
-    });
-  });
-
-  const stampSVG = kind => kind==="culpado"
-    ? '<svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="70" fill="#7e1a1a"/><circle cx="75" cy="75" r="70" fill="none" stroke="#e9b9a6" stroke-width="1.5" opacity=".5"/><circle cx="75" cy="75" r="56" fill="none" stroke="#e9b9a6" stroke-width="1.6"/><text x="75" y="70" text-anchor="middle" font-family="ui-sans-serif,sans-serif" font-size="15" letter-spacing="4" fill="#f4e3d6">CULPADO</text><text x="75" y="92" text-anchor="middle" font-family="ui-sans-serif,sans-serif" font-size="8" letter-spacing="3" fill="#e9b9a6">LASTEN</text></svg>'
-    : '<svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="70" fill="#c6a253"/><circle cx="75" cy="75" r="70" fill="none" stroke="#3a2f16" stroke-width="1.5" opacity=".5"/><circle cx="75" cy="75" r="56" fill="none" stroke="#3a2f16" stroke-width="1.6"/><text x="75" y="70" text-anchor="middle" font-family="ui-sans-serif,sans-serif" font-size="14" letter-spacing="3" fill="#2a2114">INOCENTE</text><text x="75" y="92" text-anchor="middle" font-family="ui-sans-serif,sans-serif" font-size="8" letter-spacing="3" fill="#4a3f27">LASTEN</text></svg>';
-
-  sealBtn.addEventListener("click", ()=>{
-    if(!choice) return;
-    recordVote(choice);
-    buzz([18,40,60]);
-    const g = choice==="culpado";
-    overlay.classList.remove("g","i");
-    overlay.classList.add("show", g?"g":"i");
-    ovStamp.innerHTML = stampSVG(choice);
-    ovWord.textContent = g ? "Culpado" : "Inocente";
-    const t = new Date();
-    const hh = String(t.getHours()).padStart(2,"0");
-    const mm = String(t.getMinutes()).padStart(2,"0");
-    ovProto.textContent = "Protocolo 24CR180 · registrado às "+hh+":"+mm;
-    document.body.style.overflow = "hidden";
-  });
-
-  retify.addEventListener("click", ()=>{
-    overlay.classList.remove("show");
-    document.body.style.overflow = "";
-    ovStamp.innerHTML = "";
+  // Entrada no grupo/canal de WhatsApp
+  var joinBtn=document.getElementById("joinBtn");
+  if(GRUPO_URL){
+    joinBtn.setAttribute("href", GRUPO_URL);
+    joinBtn.setAttribute("target","_blank");
+  } else {
+    joinBtn.setAttribute("aria-disabled","true");
+    joinBtn.textContent="Em breve";
+  }
+  joinBtn.addEventListener("click", function(ev){
+    if(!GRUPO_URL){ ev.preventDefault(); console.warn("[teaser] GRUPO_URL não configurado."); return; }
+    // marca a conversão (entrada) por origem, se houver medição ativa
+    try{
+      if(ENDPOINT){
+        navigator.sendBeacon(
+          ENDPOINT + "?e=join&p=" + encodeURIComponent(origem),
+          new Blob([], {type:"text/plain"})
+        );
+      }
+    }catch(e){}
   });
 </script>
 </body>

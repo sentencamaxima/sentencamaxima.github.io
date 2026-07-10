@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<base target="_top">
+<title>Tribunal de Lasten — O Veredito</title>
+<style>
+  :root{
+    color-scheme: dark;
+    --ink:#0b0a07; --ink-2:#14110b; --panel:#17130c;
+    --brass:#c6a253; --brass-hi:#e6cd8f; --brass-dim:#8a713d;
+    --crimson:#7e1a1a; --crimson-hi:#a5312a;
+    --parchment:#e7dcc0; --parchment-2:#d8c9a4;
+    --text:#e8dfc9; --muted:#9a8b6b; --line:rgba(198,162,83,.28);
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; min-height:100dvh;
+    background:
+      radial-gradient(120% 80% at 50% -8%, rgba(198,162,83,.14), transparent 46%),
+      radial-gradient(140% 120% at 50% 120%, rgba(126,26,26,.10), transparent 55%),
+      radial-gradient(100% 100% at 50% 40%, var(--ink-2), var(--ink) 78%);
+    color:var(--text); font-family:var(--serif); -webkit-font-smoothing:antialiased;
+    display:flex; justify-content:center; align-items:flex-start;
+    padding:clamp(18px,5vw,44px) clamp(14px,4vw,28px) 48px;
+  }
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:radial-gradient(60% 42% at 50% 6%, rgba(230,205,143,.10), transparent 60%);
+    animation:flicker 6.5s ease-in-out infinite;
+  }
+  @keyframes flicker{ 0%,100%{opacity:.85} 40%{opacity:1} 55%{opacity:.7} 70%{opacity:.95} }
+
+  .decree{
+    position:relative; z-index:1; width:100%; max-width:440px;
+    background:linear-gradient(180deg, rgba(35,28,17,.55), rgba(12,10,7,.35));
+    border:1px solid var(--line);
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.9), inset 0 1px 0 rgba(230,205,143,.06);
+    padding:clamp(26px,7vw,40px) clamp(20px,6vw,34px) clamp(22px,6vw,30px);
+    display:flex; flex-direction:column; align-items:center; gap:22px;
+    animation:rise .9s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes rise{ from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none} }
+
+  .corner{ position:absolute; width:24px; height:24px; color:var(--brass); opacity:.75; }
+  .corner svg{ width:100%; height:100%; display:block; }
+  .corner.tl{ top:9px; left:9px; }
+  .corner.tr{ top:9px; right:9px; transform:scaleX(-1); }
+  .corner.bl{ bottom:9px; left:9px; transform:scaleY(-1); }
+  .corner.br{ bottom:9px; right:9px; transform:scale(-1,-1); }
+
+  .kicker{ font-family:var(--sans); font-size:.62rem; letter-spacing:.32em; text-transform:uppercase;
+    color:var(--brass); font-weight:600; text-align:center; line-height:1.7; }
+  .kicker .dot{ color:var(--brass-dim); margin:0 .5em; }
+
+  .emblem{ width:66px; height:66px; color:var(--brass); filter:drop-shadow(0 4px 10px rgba(198,162,83,.25)); }
+  .emblem svg{ width:100%; height:100%; display:block; }
+
+  .title{ margin:0; text-align:center; font-size:clamp(2.35rem,10vw,3rem); font-weight:600;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--parchment); line-height:1; text-wrap:balance; }
+
+  .rule{ display:flex; align-items:center; gap:12px; width:100%; color:var(--brass-dim); }
+  .rule::before,.rule::after{ content:""; height:1px; flex:1;
+    background:linear-gradient(90deg,transparent,var(--line),transparent); }
+  .rule .fleuron{ width:9px; height:9px; transform:rotate(45deg); border:1px solid var(--brass); }
+
+  .record{ width:100%; text-align:center; display:flex; flex-direction:column; gap:6px; }
+  .record .autos{ font-family:var(--sans); font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); }
+  .record .label{ font-family:var(--sans); font-size:.58rem; letter-spacing:.34em; text-transform:uppercase; color:var(--brass); margin-top:6px; }
+  .record .name{ font-size:1.9rem; letter-spacing:.02em; color:var(--text); font-weight:600; }
+  .charges{ display:flex; flex-wrap:wrap; justify-content:center; gap:6px 0; margin-top:4px;
+    color:var(--muted); font-size:.82rem; letter-spacing:.06em; }
+  .charges span{ padding:0 .7em; }
+  .charges span + span{ border-left:1px solid var(--line); }
+
+  .prompt{ text-align:center; color:var(--text); font-size:1.06rem; line-height:1.5; max-width:34ch; margin:0 auto; }
+  .prompt em{ color:var(--brass-hi); font-style:italic; }
+  .ask{ display:flex; flex-direction:column; align-items:center; gap:9px; }
+  .subnote{ text-align:center; color:var(--muted); font-family:var(--sans); font-size:.6rem;
+    letter-spacing:.18em; text-transform:uppercase; line-height:1.7; max-width:32ch; }
+  .subnote b{ color:var(--brass); font-weight:600; }
+
+  .ballots{ width:100%; display:flex; flex-direction:column; gap:12px; }
+  .ballot{
+    position:relative; width:100%; display:flex; align-items:center; gap:16px;
+    padding:18px 18px; cursor:pointer; font-family:var(--serif); text-align:left;
+    border:1px solid transparent; background:var(--panel); color:var(--text);
+    transition:transform .18s ease, box-shadow .25s ease, opacity .25s ease, border-color .25s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .ballot .ico{ width:34px; height:34px; flex:0 0 34px; }
+  .ballot .ico svg{ width:100%; height:100%; display:block; }
+  .ballot .verd{ display:flex; flex-direction:column; gap:2px; }
+  .ballot .verd b{ font-size:1.3rem; letter-spacing:.16em; text-transform:uppercase; font-weight:600; }
+  .ballot .verd small{ font-family:var(--sans); font-size:.62rem; letter-spacing:.22em; text-transform:uppercase; opacity:.72; }
+  .ballot.guilty{ background:linear-gradient(180deg,#5f1414,#3f0d0d); border-color:#7e1a1a; color:#f4e3d6; }
+  .ballot.guilty .ico{ color:#e9b9a6; }
+  .ballot.innocent{ background:linear-gradient(180deg,#e7dcc0,#d3c39c); border-color:#b7a366; color:#2a2114; }
+  .ballot.innocent .ico{ color:#6b551f; }
+  .ballot.innocent .verd small{ opacity:.6; }
+  .ballot:hover{ transform:translateY(-2px); }
+  .ballot:focus-visible{ outline:2px solid var(--brass-hi); outline-offset:3px; }
+  .ballots.chosen .ballot[aria-pressed="false"]{ opacity:.34; filter:saturate(.6); }
+  .ballot[aria-pressed="true"]{ box-shadow:0 0 0 2px var(--brass), 0 18px 40px -20px rgba(0,0,0,.9); }
+
+  .stamp{ position:absolute; top:50%; right:14px; width:52px; height:52px;
+    transform:translateY(-50%) scale(.4); opacity:0; pointer-events:none; }
+  .stamp svg{ width:100%; height:100%; display:block; }
+  .ballot[aria-pressed="true"] .stamp{ animation:stampin .5s cubic-bezier(.2,1.4,.3,1) forwards; }
+  @keyframes stampin{
+    0%{ opacity:0; transform:translateY(-50%) scale(1.7) rotate(-14deg) }
+    60%{ opacity:1; transform:translateY(-50%) scale(.9) rotate(4deg) }
+    100%{ opacity:.96; transform:translateY(-50%) scale(1) rotate(-3deg) }
+  }
+
+  .seal-btn{
+    width:100%; margin-top:2px; padding:16px; cursor:pointer; font-family:var(--sans);
+    font-size:.74rem; letter-spacing:.3em; text-transform:uppercase; font-weight:600; color:var(--ink);
+    background:linear-gradient(180deg,var(--brass-hi),var(--brass)); border:1px solid var(--brass-hi);
+    transition:opacity .25s ease, transform .15s ease, box-shadow .25s ease;
+    box-shadow:0 14px 30px -16px rgba(198,162,83,.7);
+  }
+  .seal-btn:disabled{ opacity:.32; cursor:not-allowed; box-shadow:none;
+    background:linear-gradient(180deg,#4a3f27,#39301d); color:var(--muted); border-color:var(--brass-dim); }
+  .seal-btn:not(:disabled):hover{ transform:translateY(-2px); }
+  .seal-btn:focus-visible{ outline:2px solid var(--parchment); outline-offset:3px; }
+
+  .foot{ font-family:var(--sans); font-size:.56rem; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--brass-dim); text-align:center; }
+
+  .overlay{
+    position:fixed; inset:0; z-index:50; display:none; flex-direction:column; align-items:center;
+    justify-content:center; gap:18px; text-align:center; padding:32px;
+    background:radial-gradient(120% 90% at 50% 30%, #17110a, #060504 80%);
+  }
+  .overlay.show{ display:flex; animation:fade .6s ease both; }
+  @keyframes fade{ from{opacity:0} to{opacity:1} }
+  .overlay .big-stamp{ width:150px; height:150px; margin-bottom:4px; animation:thud .6s cubic-bezier(.2,1.3,.3,1) both; }
+  .overlay .big-stamp svg{ width:100%; height:100%; display:block; }
+  @keyframes thud{
+    0%{ opacity:0; transform:scale(1.9) rotate(-12deg) }
+    55%{ opacity:1; transform:scale(.9) rotate(3deg) }
+    100%{ opacity:1; transform:scale(1) rotate(-2deg) }
+  }
+  .overlay .sealed{ font-family:var(--sans); font-size:.66rem; letter-spacing:.4em; text-transform:uppercase; color:var(--brass); }
+  .overlay .verdict-word{ font-size:clamp(2.6rem,13vw,3.6rem); font-weight:600; letter-spacing:.16em;
+    text-transform:uppercase; margin:0; line-height:1; }
+  .overlay.g .verdict-word{ color:#d9433a; }
+  .overlay.i .verdict-word{ color:var(--parchment); }
+  .overlay .line{ color:var(--text); max-width:30ch; line-height:1.55; font-size:1.02rem; animation:fade 1s .25s ease both; }
+  .overlay .notfinal{ color:var(--brass-hi); max-width:30ch; line-height:1.5; font-size:1.02rem; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:11px 0; margin:2px 0; animation:fade 1s .4s ease both; }
+  .overlay .notfinal b{ color:var(--parchment); font-weight:700; }
+  .overlay .hush{ color:var(--muted); font-size:.9rem; font-style:italic; max-width:28ch; animation:fade 1s .5s ease both; }
+  .overlay .proto{ font-family:var(--sans); font-size:.56rem; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--brass-dim); margin-top:6px; animation:fade 1s .7s ease both; }
+  .overlay .retify{ margin-top:10px; background:none; border:none; cursor:pointer; font-family:var(--sans);
+    font-size:.6rem; letter-spacing:.24em; text-transform:uppercase; color:var(--brass-dim);
+    text-decoration:underline; text-underline-offset:4px; animation:fade 1s .9s ease both; }
+  .overlay .retify:hover{ color:var(--brass); }
+  .overlay .retify:focus-visible{ outline:1px solid var(--brass); outline-offset:3px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; }
+    body::before{ animation:none; }
+  }
+</style>
+</head>
+<body>
+<main class="decree" role="main" aria-label="Câmara de votação do júri">
+  <span class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22V6q0-4 4-4h16"/><path d="M2 13V9q0-3 3-3h4"/></svg></span>
+  <span class="corner tr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22V6q0-4 4-4h16"/><path d="M2 13V9q0-3 3-3h4"/></svg></span>
+  <span class="corner bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22V6q0-4 4-4h16"/><path d="M2 13V9q0-3 3-3h4"/></svg></span>
+  <span class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M2 22V6q0-4 4-4h16"/><path d="M2 13V9q0-3 3-3h4"/></svg></span>
+
+  <div class="kicker">Tribunal de Lasten <span class="dot">✦</span> Câmara do Júri</div>
+
+  <div class="emblem" aria-hidden="true">
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M50 14v66"/>
+      <circle cx="50" cy="12" r="3.2" fill="currentColor" stroke="none"/>
+      <path d="M22 26h56"/>
+      <path d="M50 26 34 26M50 26 66 26"/>
+      <path d="M22 26 13 48h18z"/>
+      <path d="M78 26 69 48h18z"/>
+      <path d="M13 48q9 9 18 0"/>
+      <path d="M69 48q9 9 18 0"/>
+      <path d="M38 84h24"/>
+      <path d="M44 84q6-8 12 0"/>
+    </svg>
+  </div>
+
+  <h1 class="title">O&nbsp;Veredito</h1>
+
+  <div class="rule"><span class="fleuron"></span></div>
+
+  <div class="record">
+    <div class="autos">Autos nº 24CR180</div>
+    <div class="label">O Réu</div>
+    <div class="name">Adam Kimber</div>
+    <div class="charges">
+      <span>Adultério</span><span>Roubo</span><span>Homicídio</span>
+    </div>
+  </div>
+
+  <div class="ask">
+    <p class="prompt">Membro do Júri, pesadas as provas e ouvidos os depoimentos — <em>qual é o seu veredito?</em></p>
+    <p class="subnote">O júri é ouvido — mas o veredito final cabe ao <b>Tribunal</b>.</p>
+  </div>
+
+  <div class="ballots" id="ballots">
+    <button class="ballot guilty" type="button" aria-pressed="false" data-verdict="culpado">
+      <span class="ico" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="20" y="6" width="15" height="8" rx="1.5" transform="rotate(45 27 10)"/>
+          <path d="M22 12 9 25"/><path d="M6 34h16"/><path d="M14 25l-4 4"/>
+        </svg>
+      </span>
+      <span class="verd"><b>Culpado</b><small>Condeno o réu</small></span>
+      <span class="stamp" aria-hidden="true">
+        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="#7e1a1a"/><circle cx="26" cy="26" r="19" fill="none" stroke="#e9b9a6" stroke-width="1.2"/><text x="26" y="30" text-anchor="middle" font-family="ui-sans-serif,sans-serif" font-size="8.5" letter-spacing="1" fill="#f4e3d6">SELADO</text></svg>
+      </span>
+    </button>
+
+    <button class="ballot innocent" type="button" aria-pressed="false" data-verdict="inocente">
+      <span class="ico" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 34c0-10-6-14-14-15 8-2 14 0 14 8"/>
+          <path d="M20 34c0-10 6-14 14-15-8-2-14 0-14 8"/>
+          <path d="M20 20v14"/>
+        </svg>
+      </span>
+      <span class="verd"><b>Inocente</b><small>Absolvo o réu</small></span>
+      <span class="stamp" aria-hidden="true">
+        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="#b7a366"/><circle cx="26" cy="26" r="19" fill="none" stroke="#3a2f16" stroke-width="1.2"/><text x="26" y="30" text-anchor="middle" font-family="ui-sans-serif,sans-serif" font-size="8.5" letter-spacing="1" fill="#2a2114">SELADO</text></svg>
+      </span>
+    </button>
+  </div>
+
+  <button class="seal-btn" id="sealBtn" type="button" disabled>Selar veredito</button>
+
+  <div class="foot">Sentença Máxima · Paulinho Ramos</div>
+</main>
+
+<section class="overlay" id="overlay" role="alertdialog" aria-modal="true" aria-labelledby="ovWord">
+  <div class="big-stamp" id="ovStamp" aria-hidden="true"></div>
+  <div class="sealed">Veredito selado</div>
+  <h2 class="verdict-word" id="ovWord">—</h2>
+  <p class="line">Que conste nos autos: o seu voto foi registrado perante o Tribunal de Lasten.</p>
+  <p class="notfinal">Mas este <b>não</b> é o veredito final — o Tribunal ainda se pronunciará.</p>
+  <p class="hush">Permaneça em silêncio. O julgamento será concluído.</p>
+  <div class="proto" id="ovProto"></div>
+  <button class="retify" id="retify" type="button">Retificar meu voto</button>
+</section>
+
+<script>
+  // ============================================================
+  //  ENVIO DO VOTO  →  Google Forms (aguenta plateia gigante)
+  //  Cole abaixo os 2 valores que o criarFormulario.gs imprimiu.
+  //  Enquanto vazios, a página só mostra a cena (não envia nada).
+  // ============================================================
+  const FORM_ACTION  = "";   // ...formResponse
+  const ENTRY_ID     = "";   // entry.XXXXXXXXX
+  const FORM_OPTIONS = { culpado:"CULPADO — Condeno o réu", inocente:"INOCENTE — Absolvo o réu" };
+
+  function recordVote(verdict){
+    try{ localStorage.setItem("lasten_voto", verdict); }catch(e){}
+    if(!FORM_ACTION || !ENTRY_ID) return;          // ainda não configurado
+    const data = new FormData();
+    data.append(ENTRY_ID, FORM_OPTIONS[verdict]);
+    try{ if(navigator.sendBeacon && navigator.sendBeacon(FORM_ACTION, data)) return; }catch(e){}
+    fetch(FORM_ACTION, { method:"POST", mode:"no-cors", body:data }).catch(()=>{});
+  }
+
+  const ballots = document.getElementById("ballots");
+  const buttons = [...ballots.querySelectorAll(".ballot")];
+  const sealBtn = document.getElementById("sealBtn");
+  const overlay = document.getElementById("overlay");
+  const ovWord  = document.getElementById("ovWord");
+  const ovStamp = document.getElementById("ovStamp");
+  const ovProto = document.getElementById("ovProto");
+  const retify  = document.getElementById("retify");
+  let choice = null;
+
+  const buzz = ms => { try{ navigator.vibrate && navigator.vibrate(ms); }catch(e){} };
+
+  buttons.forEach(b=>{
+    b.addEventListener("click", ()=>{
+      choice = b.dataset.verdict;
+      buttons.forEach(x=> x.setAttribute("aria-pressed", String(x===b)));
+      ballots.classList.add("chosen");
+      sealBtn.disabled = false;
+      buzz(12);
+    });
+  });
+
+  const stampSVG = kind => kind==="culpado"
+    ? '<svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="70" fill="#7e1a1a"/><circle cx="75" cy="75" r="70" fill="none" stroke="#e9b9a6" stroke-width="1.5" opacity=".5"/><circle cx="75" cy="75" r="56" fill="none" stroke="#e9b9a6" stroke-width="1.6"/><text x="75" y="70" text-anchor="middle" font-family="ui-sans-serif,sans-serif" font-size="15" letter-spacing="4" fill="#f4e3d6">CULPADO</text><text x="75" y="92" text-anchor="middle" font-family="ui-sans-serif,sans-serif" font-size="8" letter-spacing="3" fill="#e9b9a6">LASTEN</text></svg>'
+    : '<svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="70" fill="#c6a253"/><circle cx="75" cy="75" r="70" fill="none" stroke="#3a2f16" stroke-width="1.5" opacity=".5"/><circle cx="75" cy="75" r="56" fill="none" stroke="#3a2f16" stroke-width="1.6"/><text x="75" y="70" text-anchor="middle" font-family="ui-sans-serif,sans-serif" font-size="14" letter-spacing="3" fill="#2a2114">INOCENTE</text><text x="75" y="92" text-anchor="middle" font-family="ui-sans-serif,sans-serif" font-size="8" letter-spacing="3" fill="#4a3f27">LASTEN</text></svg>';
+
+  sealBtn.addEventListener("click", ()=>{
+    if(!choice) return;
+    recordVote(choice);
+    buzz([18,40,60]);
+    const g = choice==="culpado";
+    overlay.classList.remove("g","i");
+    overlay.classList.add("show", g?"g":"i");
+    ovStamp.innerHTML = stampSVG(choice);
+    ovWord.textContent = g ? "Culpado" : "Inocente";
+    const t = new Date();
+    const hh = String(t.getHours()).padStart(2,"0");
+    const mm = String(t.getMinutes()).padStart(2,"0");
+    ovProto.textContent = "Protocolo 24CR180 · registrado às "+hh+":"+mm;
+    document.body.style.overflow = "hidden";
+  });
+
+  retify.addEventListener("click", ()=>{
+    overlay.classList.remove("show");
+    document.body.style.overflow = "";
+    ovStamp.innerHTML = "";
+  });
+</script>
+</body>
+</html>
