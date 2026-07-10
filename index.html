@@ -76,11 +76,11 @@
 
   /* countdown */
   .cd-label{font-family:var(--mono); font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--amber); margin-top:30px}
-  .cd{display:flex; gap:clamp(8px,3vw,20px); justify-content:center; margin:12px 0 4px}
-  .cd .u{min-width:60px}
-  .cd .n{font-family:var(--engrave); font-weight:700; font-size:clamp(26px,7vw,44px); color:var(--parch); font-variant-numeric:tabular-nums}
-  .cd .k{font-family:var(--mono); font-size:9.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--amber); margin-top:4px}
-  .date{font-family:var(--mono); font-size:12px; letter-spacing:.24em; color:var(--brass); margin-top:8px}
+  .date{font-family:var(--engrave); font-weight:700; font-size:clamp(32px,9vw,58px); letter-spacing:.06em; color:var(--parch); margin:10px 0 14px; line-height:1.05; text-shadow:0 1px 0 rgba(0,0,0,.6)}
+  .cd{display:flex; gap:clamp(6px,2.2vw,14px); justify-content:center; margin:0 0 4px}
+  .cd .u{min-width:38px}
+  .cd .n{font-family:var(--mono); font-weight:500; font-size:clamp(14px,3.4vw,19px); color:var(--brass); font-variant-numeric:tabular-nums}
+  .cd .k{font-family:var(--mono); font-size:8px; letter-spacing:.18em; text-transform:uppercase; color:var(--amber); margin-top:3px}
 
   /* capture */
   form{margin:30px auto 0; max-width:420px; text-align:left}
@@ -151,13 +151,13 @@
     <p class="lede">Um processo corre em seu nome. As provas estão sendo reunidas — e, um dia, <em>o espelho os revelará.</em></p>
 
     <div class="cd-label">O tribunal se reúne em</div>
+    <div class="date">08 · 08 · 2026 — 20H00</div>
     <div class="cd" id="cd" aria-live="polite">
       <div class="u"><div class="n" id="d">--</div><div class="k">dias</div></div>
       <div class="u"><div class="n" id="h">--</div><div class="k">horas</div></div>
       <div class="u"><div class="n" id="m">--</div><div class="k">min</div></div>
       <div class="u"><div class="n" id="s">--</div><div class="k">seg</div></div>
     </div>
-    <div class="date">08 · 08 · 2026 — 20H00</div>
 
     <div class="join">
       <div class="cta">Sua intimação exige presença</div>
