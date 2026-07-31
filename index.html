@@ -21,7 +21,7 @@
     --mono:"IBM Plex Mono", ui-monospace, "Courier New", monospace;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%}
+  html,body{margin:0}
   body{
     background:
       radial-gradient(120% 80% at 50% 8%, #17140d 0%, #0b0a07 55%, #060504 100%);
@@ -30,6 +30,9 @@
     min-height:100dvh;
     display:flex; align-items:center; justify-content:center;
     padding:clamp(20px,5vw,56px);
+    padding-top:max(clamp(20px,5vw,56px), env(safe-area-inset-top));
+    padding-bottom:max(clamp(20px,5vw,56px), env(safe-area-inset-bottom));
+    box-sizing:border-box;
     position:relative; overflow-x:hidden;
     -webkit-font-smoothing:antialiased;
   }
@@ -126,6 +129,15 @@
   .done p{color:var(--ivory); font-style:italic; max-width:38ch; margin:0 auto}
 
   .footnote{font-family:var(--mono); font-size:10px; letter-spacing:.14em; color:#5c5342; margin-top:34px; text-transform:uppercase}
+  /* celular: evita que as linhas largas estourem a tela */
+  @media (max-width:430px){
+    .frame{padding-left:16px; padding-right:16px}
+    .meta{font-size:9px; letter-spacing:.11em}
+    .cd-label{font-size:9.5px; letter-spacing:.15em; margin-top:24px}
+    .cta{font-size:12.5px; letter-spacing:.05em}
+    .date{font-size:clamp(26px,7vw,58px); letter-spacing:.02em}
+    .footnote{font-size:9px; letter-spacing:.08em}
+  }
   @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
