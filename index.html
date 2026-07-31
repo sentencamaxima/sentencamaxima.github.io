@@ -174,9 +174,8 @@
   var TARGET = new Date("2026-08-08T20:00:00-03:00").getTime();
   // Endpoint opcional de medição de scans (Apps Script). Deixe vazio se não usar.
   var ENDPOINT = ""; // ex.: "https://script.google.com/macros/s/XXX/exec"
-  // Link do grupo/canal de WhatsApp. TODO: colar o convite (https://chat.whatsapp.com/XXXX
-  // ou, ideal, o link do CANAL do WhatsApp).
-  var GRUPO_URL = ""; // ex.: "https://chat.whatsapp.com/ABC123..."
+  // Link de inscrição no evento (app da Igreja Além do Véu).
+  var EVENT_URL = "https://avsbc.inpeaceapp.com/events/71875";
   // ========================================================================
 
   // Origem do scan (?p=) para medição — capturada junto do contato
@@ -206,17 +205,17 @@
   }
   tick(); setInterval(tick, 1000);
 
-  // Entrada no grupo/canal de WhatsApp
+  // Inscrição no evento
   var joinBtn=document.getElementById("joinBtn");
-  if(GRUPO_URL){
-    joinBtn.setAttribute("href", GRUPO_URL);
+  if(EVENT_URL){
+    joinBtn.setAttribute("href", EVENT_URL);
     joinBtn.setAttribute("target","_blank");
   } else {
     joinBtn.setAttribute("aria-disabled","true");
     joinBtn.textContent="Em breve";
   }
   joinBtn.addEventListener("click", function(ev){
-    if(!GRUPO_URL){ ev.preventDefault(); console.warn("[teaser] GRUPO_URL não configurado."); return; }
+    if(!EVENT_URL){ ev.preventDefault(); console.warn("[teaser] EVENT_URL não configurado."); return; }
     // marca a conversão (entrada) por origem, se houver medição ativa
     try{
       if(ENDPOINT){
